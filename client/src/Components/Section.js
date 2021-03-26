@@ -4,7 +4,7 @@ import Widget from "./Widget";
 
 const Section = (props) => {
 
-  const { section_title, section_data, fC, fB, fP, cT } = props;
+  const { section_title, section_data, fC, cC, fB, fP, cT } = props;
 
   const displayClients = async () => {
     await fC();
@@ -23,7 +23,7 @@ const Section = (props) => {
         <div className="py-2 px-4">
           {section_data.map((dataItem) => {
             return (
-              <Widget key={dataItem.identifier} identifier={dataItem.identifier} name={dataItem.name} poc={dataItem.point_of_contact} fC={fC} fB={fB} fP={fP} cT={cT} />
+              <Widget key={dataItem.identifier} identifier={dataItem.identifier} name={dataItem.name} poc={dataItem.point_of_contact} fC={fC} cC={cC} fB={fB} fP={fP} cT={cT} />
             );
           })}
         </div>

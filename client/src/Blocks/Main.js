@@ -4,13 +4,11 @@ import Section from "../Components/Section";
 
 const Main = () => {
 
-  const apiRootURL = "http://09bd50d9135b.ngrok.io/";
-
   const [title, setTitle] = useState("Loading...");
   const [data, setData] = useState([]);
 
   const fetchClients = async () => {
-    const response = await fetch(apiRootURL + "clients/", {
+    const response = await fetch("/api/clients/", {
       method: "GET",
     });
     const responseJSON = await response.json();
@@ -18,21 +16,39 @@ const Main = () => {
     setData((prevState) => newState);
   };
 
+  const createClient = async (newClient) => {
+    if (newClient.identifier) {
+      const response = await fetch(`/api/clients/${newClient.identifier}/`, {
+        method: "PUT",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newClient),
+      });
+      return response;
+    }
+    const response = await fetch(`/api/clients/`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newClient),
+    });
+    return response;
+  };
+
   const fetchBrands = async (clientID) => {
-    const response = await fetch(apiRootURL + "brands/", {
+    const response = await fetch("/api/brands/", {
       method: "GET",
     });
     const responseJSON = await response.json();
     const results = responseJSON["results"];
-    console.log(results);
-    console.log(apiRootURL + "clients/" + clientID + "/");
-    const newState = results.filter(result => result.client === (apiRootURL + "clients/" + clientID + "/"));
-    console.log(newState);
+    const newState = results.filter(result => result.client === (`http://127.0.0.1:8000/api/clients/${clientID}/`));
     setData((prevState) => newState);
   };
 
   const fetchProducts = async () => {
-    const response = await fetch(apiRootURL + "products/", {
+    const response = await fetch("/api/products/", {
       method: "GET",
     });
     const responseJSON = await response.json();
@@ -53,7 +69,7 @@ const Main = () => {
           <button className="items-center text-red-600 bg-transparent border-b border-red-600 py-1 px-3 focus:outline-none hover:bg-gray-200 text-base">Manage</button>
         </div>
         <div className="flex flex-wrap">
-          <Section section_title={title} section_data={data} fC={fetchClients} fB={fetchBrands} fP={fetchProducts} cT={changeTitle} />
+          <Section section_title={title} section_data={data} fC={fetchClients} cC={createClient} fB={fetchBrands} fP={fetchProducts} cT={changeTitle} />
         </div>
       </div>
     </section>

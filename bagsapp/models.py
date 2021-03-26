@@ -5,7 +5,11 @@ from datetime import datetime
 
 class Client(models.Model):
     identifier = models.UUIDField(
-        primary_key=True, verbose_name="Client's ID", default=uuid.uuid4, editable=False
+        primary_key=True,
+        verbose_name="Client's ID",
+        default=uuid.uuid4,
+        editable=False,
+        auto_created=True,
     )
     name = models.CharField(
         verbose_name="Client's Name", max_length=1024, blank=False, null=False
