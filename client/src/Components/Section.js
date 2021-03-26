@@ -12,7 +12,6 @@ const Section = (props) => {
   };
 
   useEffect(() => {
-    console.log("Inside Section...");
     displayClients();
   }, []);
 

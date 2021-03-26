@@ -15,3 +15,19 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.logoOne {
+  color: #03989e;
+}
+
+.logoTwo {
+  color: #00c2cb;
+}
+
+.logoThree {
+  color: #5ce1e6;
+}
+
+.managementConsoleStyles {
+  background: rgba(0, 0, 0, 0.6);
+}

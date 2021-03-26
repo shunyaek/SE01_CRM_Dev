@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ClientForm from '../Components/ClientForm';
 import Section from "../Components/Section";
+import ManagementConsole from "../Components/ManagementConsole";
 
 const Main = () => {
 
@@ -27,7 +28,7 @@ const Main = () => {
       });
       return response;
     }
-    const response = await fetch(`/api/clients/`, {
+    const response = await fetch("/api/clients/", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
@@ -61,25 +62,43 @@ const Main = () => {
     setTitle((prevState) => newState);
   };
 
-  return (
-    <section className="text-gray-600 body-font flex-grow">
-      <div className="lg:px-12 lg:py-12 mx-auto">
-        <div className="container mx-auto flex flex-wrap px-8 py-4 flex-row md:flex-row items-center justify-between">
-          <button className="items-center text-green-600 bg-transparent border-b border-green-600 py-1 px-3 focus:outline-none hover:bg-gray-200 text-base">Back</button>
-          <button className="items-center text-red-600 bg-transparent border-b border-red-600 py-1 px-3 focus:outline-none hover:bg-gray-200 text-base">Manage</button>
-        </div>
-        <div className="flex flex-wrap">
-          <Section section_title={title} section_data={data} fC={fetchClients} cC={createClient} fB={fetchBrands} fP={fetchProducts} cT={changeTitle} />
-        </div>
-      </div>
-    </section>
-  );
+  const goBack = () => {
+    if (title === "Manage") {
+      toggleManagementConsole();
+    }
+  };
+
+  const [isManagementConsoleVisible, setIsManagementConsoleVisible] = useState(false);
+
+  const toggleManagementConsole = () => {
+    setIsManagementConsoleVisible(!isManagementConsoleVisible);
+  };
 
   /* return (
     <section className="text-gray-600 body-font flex-grow">
-      <ClientForm />
+      <div className="lg:px-12 lg:py-12 mx-auto">
+        <div className="container mx-auto flex flex-wrap px-8 py-4 flex-row md:flex-row items-center justify-between">
+          <button className="items-center text-green-600 bg-transparent border-b border-green-600 py-1 px-3 focus:outline-none hover:bg-gray-200 text-base" onClick={() => {
+            console.log("Going back...");
+            goBack();
+          }}>Back</button>
+          {isManagementConsoleVisible || <button className="items-center text-red-600 bg-transparent border-b border-red-600 py-1 px-3 focus:outline-none hover:bg-gray-200 text-base" onClick={() => {
+            console.log("Entering Management Mode...");
+            toggleManagementConsole();
+          }}>Manage</button>}
+        </div>
+        <div className="flex flex-wrap">
+          {isManagementConsoleVisible ? <ManagementConsole section_title={title} cT={changeTitle} /> : <Section section_title={title} section_data={data} fC={fetchClients} cC={createClient} fB={fetchBrands} fP={fetchProducts} cT={changeTitle} />}
+        </div>
+      </div>
     </section>
   ); */
+
+  return (
+    <section className="text-gray-600 body-font flex-grow">
+      <ClientForm cC={createClient} />
+    </section>
+  );
 };
 
 export default Main;

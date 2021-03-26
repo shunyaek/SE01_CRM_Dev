@@ -15,13 +15,6 @@ const Widget = (props) => {
           fB(identifier);
           cT("Brands");
         }}>View</button>
-        <button className="inline-flex items-center border border-green-600 bg-white py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base" onClick={async () => {
-          const newClient = { identifier: "0fc25da3-b350-4832-8219-34b76ece1c60", name: "10am Inc." };
-          console.log(newClient);
-          await cC(newClient);
-          await fC();
-          cT("Clients");
-        }}>Create</button>
       </div>
     </div>
   );
