@@ -33,7 +33,7 @@ router.register(
 )
 
 urlpatterns = [
+    path("auth/", include("dj_rest_auth.urls")),
     path("api/", include(router.urls)),
     path("admin/", admin.site.urls),
-    path("api-auth/", include("rest_framework.urls")),
 ]

@@ -12,7 +12,7 @@ class ClientSerializer(serializers.HyperlinkedModelSerializer):
             "point_of_contact",
             "address",
             "email",
-            "added_date_time",
+            "created_date_time",
             "modified_date_time",
         ]
 
@@ -25,7 +25,7 @@ class BrandSerializer(serializers.HyperlinkedModelSerializer):
             "identifier",
             "name",
             "client",
-            "added_date_time",
+            "created_date_time",
             "modified_date_time",
         ]
 
@@ -47,7 +47,7 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
             "liner_weight",
             "gauge",
             "brands",
-            "added_date_time",
+            "created_date_time",
             "modified_date_time",
         ]
 
@@ -61,6 +61,6 @@ class ProductQuantitySerializer(serializers.HyperlinkedModelSerializer):
             "quantity",
             "product",
             "brand",
-            "added_date_time",
+            "created_date_time",
             "modified_date_time",
         ]

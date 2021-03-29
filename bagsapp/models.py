@@ -24,7 +24,7 @@ class Client(models.Model):
     email = models.EmailField(
         verbose_name="Client's E-Mail Address", blank=True, null=True
     )
-    added_date_time = models.DateTimeField(auto_now_add=True)
+    created_date_time = models.DateTimeField(auto_now_add=True)
     modified_date_time = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -39,7 +39,7 @@ class Brand(models.Model):
         verbose_name="Brand's Name", max_length=1024, blank=False, null=False
     )
     client = models.ForeignKey("Client", on_delete=models.CASCADE)
-    added_date_time = models.DateTimeField(auto_now_add=True)
+    created_date_time = models.DateTimeField(auto_now_add=True)
     modified_date_time = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -92,7 +92,7 @@ class Product(models.Model):
     )
     gauge = models.PositiveIntegerField(verbose_name="Gauge", blank=False, null=True)
     brands = models.ManyToManyField(Brand)
-    added_date_time = models.DateTimeField(auto_now_add=True)
+    created_date_time = models.DateTimeField(auto_now_add=True)
     modified_date_time = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -111,7 +111,7 @@ class ProductQuantity(models.Model):
     )
     product = models.ForeignKey("Product", on_delete=models.CASCADE)
     brand = models.ForeignKey("Brand", on_delete=models.CASCADE)
-    added_date_time = models.DateTimeField(auto_now_add=True)
+    created_date_time = models.DateTimeField(auto_now_add=True)
     modified_date_time = models.DateTimeField(auto_now=True)
 
     def __str__(self):
